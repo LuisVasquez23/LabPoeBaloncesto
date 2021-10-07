@@ -40,11 +40,11 @@ public class MDIMainApp extends javax.swing.JFrame {
         desktopPane.setLayout(desktopPaneLayout);
         desktopPaneLayout.setHorizontalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGap(0, 767, Short.MAX_VALUE)
         );
         desktopPaneLayout.setVerticalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
+            .addGap(0, 572, Short.MAX_VALUE)
         );
 
         fileMenu.setMnemonic('f');
@@ -87,7 +87,9 @@ public class MDIMainApp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
-        // TODO add your handling code here:
+        AdminUniversidad universidadForm = new AdminUniversidad();
+        universidadForm.setVisible(true);
+        this.desktopPane.add(universidadForm);
     }//GEN-LAST:event_openMenuItemActionPerformed
 
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
