@@ -10,6 +10,7 @@ import Entidades.JugadorAcciones;
 import Entidades.Universidad;
 import Entidades.UniversidadAcciones;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,11 +23,15 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
     private JugadorAcciones jugadores = new JugadorAcciones();
     private UniversidadAcciones universidades = new UniversidadAcciones();
     private DefaultTableModel tablaModelo;
+    private DefaultComboBoxModel modeloUFiltro , modeloPosicion , modeloUIngreso;
     
     public AdminJugadorForms() {
         initComponents();
         this.tablaModelo = (DefaultTableModel) this.tablaJugadores.getModel();
         this.setLocation(10,10);
+        this.modeloUFiltro = (DefaultComboBoxModel) this.comboUniversidadFiltro.getModel();
+        this.modeloUIngreso = (DefaultComboBoxModel) this.inputUniversidadCombo.getModel();
+        this.modeloPosicion = (DefaultComboBoxModel) this.inputPosicionCombo.getModel();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -310,6 +315,7 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     void cargarJugadores(ArrayList<Jugador> jugadoresCargados){
+                
         this.tablaModelo.setRowCount(0);
         
         for (Jugador jugador : jugadoresCargados) {
@@ -375,9 +381,33 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
                 if (jugadores.cantidadJugador(jugador.getId_universidad()) > 15) {
                     JOptionPane.showMessageDialog(null,"Ya haz ingresado el maximo de jugadores");
                 }else{
-                    JOptionPane.showMessageDialog(null,jugadores.agregarJugador(jugador));
-                    cargarJugadores(this.jugadores.cargarDatos());
-                    resetCampos();
+                    boolean isPossible = false;
+                    
+                    switch(jugador.getId_posicion()){
+                        case "AP":
+                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 4);
+                            break;
+                        case "BA":
+                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 1);
+                            break;
+                        case "C":
+                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 5);
+                            break;
+                        case "E":
+                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 2);
+                            break;
+                        case "SF":
+                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 3);
+                            break;
+                    }
+                    
+                    if (isPossible) {
+                        JOptionPane.showMessageDialog(null,jugadores.agregarJugador(jugador));
+                        cargarJugadores(this.jugadores.cargarDatos());
+                        resetCampos();
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Haz llegado al maximo de jugadores para la posición: " + jugador.getId_posicion());
+                    }
                 }                
             }
             
@@ -388,7 +418,12 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
-    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+    void cargarCombo(){
+   
+       this.modeloUFiltro.removeAllElements();
+        this.modeloUIngreso.removeAllElements();
+        this.modeloPosicion.removeAllElements();
+        
         ArrayList<Universidad> universidadesCargadas = this.universidades.cargarUniversidades();
         ArrayList<String> posiciones = this.jugadores.obtenerPosiciones();
         
@@ -404,7 +439,11 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
         for (String posicion : posiciones) {
             this.inputPosicionCombo.addItem(posicion);
         }
+    }
+    
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         
+        cargarCombo();
         cargarJugadores(this.jugadores.cargarDatos());
     }//GEN-LAST:event_formInternalFrameOpened
 
@@ -464,9 +503,34 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"Por favor revisa los campos. Revisa que no esten vacios ó que sea un valor correcto");
                 resetCampos();
             }else{
-                JOptionPane.showMessageDialog(null,jugadores.actualizarJugador(jugador));
-                 cargarJugadores(this.jugadores.cargarDatos());
-                 resetCampos();
+                
+                boolean isPossible = false;
+                    
+                    switch(jugador.getId_posicion()){
+                        case "AP":
+                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 4);
+                            break;
+                        case "BA":
+                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 1);
+                            break;
+                        case "C":
+                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 5);
+                            break;
+                        case "E":
+                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 2);
+                            break;
+                        case "SF":
+                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 3);
+                            break;
+                    }
+                
+                if (isPossible) {
+                    JOptionPane.showMessageDialog(null,jugadores.actualizarJugador(jugador));
+                    cargarJugadores(this.jugadores.cargarDatos());
+                    resetCampos();
+                }else{
+                    JOptionPane.showMessageDialog(null,"No se puede actualizar este jugador porque la posicion seleccionada llego a su maximo de jugadores");
+                }
             }
             
             
@@ -484,7 +548,7 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
             String duiJugador = this.inputDui.getText();
             String id_universidad = this.inputUniversidadCombo.getSelectedItem().toString();
             
-            if (jugadores.cantidadJugador(id_universidad) < 5) {
+            if (jugadores.cantidadJugador(id_universidad) <= 5) {
                 JOptionPane.showMessageDialog(null,"Ya haz llegado al minimo de jugadores (5)");
                 resetCampos();
             }else{

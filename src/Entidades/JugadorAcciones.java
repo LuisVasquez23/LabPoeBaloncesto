@@ -221,4 +221,33 @@ public class JugadorAcciones {
         
         return cantidad;
     }
+    
+    public int cantidadPerPosicion(String id_universidad , String id_posicion){
+        
+        int cantidad = 0;        
+        Conexion objetoConexion = new Conexion();
+        Connection conexion = objetoConexion.getConexion();
+        
+        try {
+            String sql = "SELECT "
+                        + "COUNT(jugador.dui) AS cantidad "
+                        + "FROM jugador"
+                        + " WHERE jugador.id_universidad = '"+id_universidad+"' AND jugador.id_posicion = '"+id_posicion+"'";
+            
+            Statement statement = conexion.createStatement();
+            ResultSet resultados = statement.executeQuery(sql);
+            
+            while (resultados.next()) {
+                cantidad = resultados.getInt(1);
+            }
+            
+            statement.close();
+            resultados.close();
+            
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        
+        return cantidad;
+    }
 }
