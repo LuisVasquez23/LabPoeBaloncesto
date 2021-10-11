@@ -8,6 +8,7 @@ public class Jugador {
     private double peso;
     private String id_posicion;
     private String id_universidad;
+    private String id_equipo;
     
     // Metodos getter
 
@@ -68,5 +69,14 @@ public class Jugador {
     public void setPeso(double peso) {
         this.peso = peso;
     }
+
+    public void setId_equipo(String id_equipo) {
+        this.id_equipo = id_equipo;
+    }
+
+    public String getId_equipo() {
+        return id_equipo;
+    }
+    
     
 }

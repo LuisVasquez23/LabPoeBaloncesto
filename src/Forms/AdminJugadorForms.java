@@ -5,6 +5,8 @@
  */
 package Forms;
 
+import Entidades.Equipo;
+import Entidades.EquipoAcciones;
 import Entidades.Jugador;
 import Entidades.JugadorAcciones;
 import Entidades.Universidad;
@@ -24,7 +26,8 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
     private UniversidadAcciones universidades = new UniversidadAcciones();
     private DefaultTableModel tablaModelo;
     private DefaultComboBoxModel modeloUFiltro , modeloPosicion , modeloUIngreso;
-    
+    private EquipoAcciones equipos = new EquipoAcciones();
+            
     public AdminJugadorForms() {
         initComponents();
         this.tablaModelo = (DefaultTableModel) this.tablaJugadores.getModel();
@@ -67,6 +70,11 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
         btnDelete = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         inputEstatura = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        comboEquipo = new javax.swing.JComboBox<>();
+        jLabel16 = new javax.swing.JLabel();
+        inputCEquipo = new javax.swing.JComboBox<>();
+        labelCantidadEquipo = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -95,7 +103,7 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Dui", "Nombre", "Edad", "Estatura", "Peso", "Posicion", "Universidad"
+                "Dui", "Nombre", "Edad", "Estatura", "Peso", "Posicion", "Universidad", "Codigo equipo"
             }
         ));
         tablaJugadores.setFocusable(false);
@@ -182,75 +190,97 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
 
         jLabel14.setText("Estatura");
 
+        jLabel15.setText("Equipo");
+
+        comboEquipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboEquipoActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setText("Equipo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jSeparator1)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(comboUniversidadFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboUniversidadFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel5)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(inputNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(inputDui, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jLabel6))
-                                    .addGap(28, 28, 28)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(inputEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(18, 18, 18))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                    .addComponent(jLabel7)
-                                                    .addGap(45, 45, 45)))
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel8)
-                                                .addComponent(inputPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addComponent(jLabel14)
-                                        .addComponent(inputEstatura, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(jLabel13)
-                                .addComponent(jLabel12))
-                            .addGap(44, 44, 44)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelCantidadEquipo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(259, 259, 259)
+                        .addComponent(activateUpdate))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(inputNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(inputDui, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel6))
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(inputEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel7)
+                                                .addGap(45, 45, 45)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel8)
+                                            .addComponent(inputPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel14)
+                                    .addComponent(inputEstatura, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel11))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel10)
                                     .addComponent(inputUniversidadCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(inputPosicionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(259, 259, 259)
-                            .addComponent(activateUpdate)))
-                    .addComponent(jLabel11))
+                                    .addComponent(inputPosicionCombo, 0, 262, Short.MAX_VALUE)
+                                    .addComponent(jLabel16)
+                                    .addComponent(inputCEquipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(labelCantidadEquipo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -260,14 +290,16 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(comboUniversidadFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboUniversidadFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(comboEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(activateUpdate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -293,22 +325,25 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
                     .addComponent(inputNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inputPosicionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inputEstatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel16))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(inputCEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAdd)
-                            .addComponent(btnUpdate)
-                            .addComponent(btnDelete))
-                        .addGap(54, 54, 54))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel13)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jLabel13))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDelete)
+                            .addComponent(btnUpdate)
+                            .addComponent(btnAdd))))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
@@ -326,7 +361,8 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
                     Double.toString(jugador.getEstatura()) + " cm",
                     Double.toString(jugador.getPeso())  + " Kg",
                     jugador.getId_posicion(),
-                    jugador.getId_universidad()
+                    jugador.getId_universidad(),
+                    jugador.getId_equipo()
                 };
 
                 this.tablaModelo.addRow(datos);
@@ -342,12 +378,13 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
             this.inputUniversidadCombo.setSelectedIndex(0);
             this.inputPosicionCombo.setSelectedIndex(0);
             this.inputEstatura.setText("");
+            this.inputCEquipo.setSelectedIndex(0);
     }
     private void comboUniversidadFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboUniversidadFiltroActionPerformed
         this.tablaModelo.setRowCount(0);
         
-        if (jugadores.filtrarJugador(this.comboUniversidadFiltro.getSelectedItem().toString()).size() > 0) {
-            cargarJugadores(jugadores.filtrarJugador(this.comboUniversidadFiltro.getSelectedItem().toString()));
+        if (jugadores.filtrarJugadorUniversidad(this.comboUniversidadFiltro.getSelectedItem().toString()).size() > 0) {
+            cargarJugadores(jugadores.filtrarJugadorUniversidad(this.comboUniversidadFiltro.getSelectedItem().toString()));
         }else if(!this.comboUniversidadFiltro.getSelectedItem().toString().contains("Selecciona una universidad")){
             JOptionPane.showMessageDialog(null,"La universidad selecionada no tiene jugadores");
         }else if(this.comboUniversidadFiltro.getSelectedItem().toString().contains("Selecciona una universidad")){
@@ -358,8 +395,11 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboUniversidadFiltroActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.labelCantidadEquipo.setText("");
         cargarJugadores(this.jugadores.cargarDatos());
         this.comboUniversidadFiltro.setSelectedIndex(0);
+        this.comboEquipo.setSelectedIndex(0);
+        resetCampos();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -373,37 +413,38 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
             jugador.setId_posicion(this.inputPosicionCombo.getSelectedItem().toString());
             jugador.setId_universidad(this.inputUniversidadCombo.getSelectedItem().toString());
             jugador.setEstatura(Double.parseDouble(this.inputEstatura.getText()));
+            jugador.setId_equipo(this.inputCEquipo.getSelectedItem().toString());
             
             if (isCorrect()) {
                 JOptionPane.showMessageDialog(null,"Por favor revisa los campos. Revisa que no esten vacios ó que sea un valor correcto");
             }else{
                 
-                if (jugadores.cantidadJugador(jugador.getId_universidad()) > 15) {
-                    JOptionPane.showMessageDialog(null,"Ya haz ingresado el maximo de jugadores");
+                if (jugadores.cantidadJugador(jugador.getId_equipo()) >= 15) {
+                    JOptionPane.showMessageDialog(null,"Ya haz ingresado el maximo de jugadores en este equipo");
                 }else{
                     boolean isPossible = false;
                     
                     switch(jugador.getId_posicion()){
                         case "AP":
-                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 4);
+                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_equipo(),jugador.getId_posicion()) < 4);
                             break;
                         case "BA":
-                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 1);
+                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_equipo(),jugador.getId_posicion()) < 1);
                             break;
                         case "C":
-                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 5);
+                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_equipo(),jugador.getId_posicion()) < 5);
                             break;
                         case "E":
-                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 2);
+                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_equipo(),jugador.getId_posicion()) < 2);
                             break;
                         case "SF":
-                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 3);
+                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_equipo(),jugador.getId_posicion()) < 3);
                             break;
                     }
                     
                     if (isPossible) {
                         JOptionPane.showMessageDialog(null,jugadores.agregarJugador(jugador));
-                        cargarJugadores(this.jugadores.cargarDatos());
+                        cargarJugadores(this.jugadores.filtrarJugadorEquipo(jugador.getId_equipo()));
                         resetCampos();
                     }else{
                         JOptionPane.showMessageDialog(null,"Haz llegado al maximo de jugadores para la posición: " + jugador.getId_posicion());
@@ -411,6 +452,9 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
                 }                
             }
             
+            this.labelCantidadEquipo.setText("Cantidad jugadores: " 
+                        + this.jugadores.cantidadJugador(jugador.getId_equipo())
+                        + " Equipo: " +  jugador.getId_equipo() );
             
 
         } catch (Exception e) {
@@ -426,10 +470,18 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
         
         ArrayList<Universidad> universidadesCargadas = this.universidades.cargarUniversidades();
         ArrayList<String> posiciones = this.jugadores.obtenerPosiciones();
-        
+        ArrayList<Equipo> equipos = this.equipos.cargarEquipos();
+                
         this.comboUniversidadFiltro.addItem("-- Selecciona una universidad -- ");
         this.inputUniversidadCombo.addItem("-- Selecciona una universidad -- ");
         this.inputPosicionCombo.addItem("-- Selecciona una posicion -- ");
+        this.comboEquipo.addItem("-- Selecciona un equipo --");
+        this.inputCEquipo.addItem("-- Selecciona un equipo --");
+        
+        for (Equipo equipo : equipos) {
+            this.comboEquipo.addItem(equipo.getCodigo_equipo());
+            this.inputCEquipo.addItem(equipo.getCodigo_equipo());
+        }
         
         for (Universidad universidad : universidadesCargadas) {
             this.comboUniversidadFiltro.addItem(universidad.getId_universidad());
@@ -473,7 +525,7 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
             SelectedPlayer.setPeso(Double.parseDouble(this.tablaJugadores.getValueAt(fila_selecionada,4).toString().substring(0,this.tablaJugadores.getValueAt(fila_selecionada,4).toString().indexOf("K"))));
             SelectedPlayer.setId_posicion(this.tablaJugadores.getValueAt(fila_selecionada,5).toString());
             SelectedPlayer.setId_universidad(this.tablaJugadores.getValueAt(fila_selecionada,6).toString());
-            
+            SelectedPlayer.setId_equipo(this.tablaJugadores.getValueAt(fila_selecionada,7).toString());
             //Asignamos nuevos valores
             this.inputDui.setText(SelectedPlayer.getDui());
             this.inputNombre.setText(SelectedPlayer.getNombre());
@@ -482,6 +534,7 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
             this.inputUniversidadCombo.setSelectedItem(SelectedPlayer.getId_universidad());
             this.inputPosicionCombo.setSelectedItem(SelectedPlayer.getId_posicion());
             this.inputEstatura.setText(Double.toString(SelectedPlayer.getEstatura()));
+            this.inputCEquipo.setSelectedItem(SelectedPlayer.getId_equipo());
         }else{
             JOptionPane.showMessageDialog(null,"Debes de activar el checkbox para poder actualizar ó eliminar datos");
         }
@@ -498,6 +551,7 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
             jugador.setId_posicion(this.inputPosicionCombo.getSelectedItem().toString());
             jugador.setId_universidad(this.inputUniversidadCombo.getSelectedItem().toString());
             jugador.setEstatura(Double.parseDouble(this.inputEstatura.getText()));
+            jugador.setId_equipo(this.inputCEquipo.getSelectedItem().toString());
             
             if (isCorrect()) {
                 JOptionPane.showMessageDialog(null,"Por favor revisa los campos. Revisa que no esten vacios ó que sea un valor correcto");
@@ -505,25 +559,35 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
             }else{
                 
                 boolean isPossible = false;
+                    int fila_selecionada = this.tablaJugadores.getSelectedRow();
                     
-                    switch(jugador.getId_posicion()){
-                        case "AP":
-                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 4);
-                            break;
-                        case "BA":
-                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 1);
-                            break;
-                        case "C":
-                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 5);
-                            break;
-                        case "E":
-                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 2);
-                            break;
-                        case "SF":
-                            isPossible = (jugadores.cantidadPerPosicion(jugador.getId_universidad(),jugador.getId_posicion()) < 3);
-                            break;
+                    
+                    if (!this.tablaJugadores.getValueAt(fila_selecionada,5).toString().equals(jugador.getId_posicion())) {
+                        switch(jugador.getId_posicion()){
+                            case "AP":
+                                isPossible = (  jugadores.cantidadPerPosicion(jugador.getId_equipo(),jugador.getId_posicion()) < 4);
+                                break;
+                            case "BA":
+                                isPossible = (jugadores.cantidadPerPosicion(jugador.getId_equipo(),jugador.getId_posicion()) < 1 
+                                              );
+                                break;
+                            case "C":
+                                isPossible = (jugadores.cantidadPerPosicion(jugador.getId_equipo(),jugador.getId_posicion()) < 5
+                                              );
+                                break;
+                            case "E":
+                                isPossible = (jugadores.cantidadPerPosicion(jugador.getId_equipo(),jugador.getId_posicion()) < 2
+                                   );
+                                break;
+                            case "SF":
+                                isPossible = (jugadores.cantidadPerPosicion(jugador.getId_equipo(),jugador.getId_posicion()) < 3
+                                              );
+                                break;
+                        }
+                    }else{
+                        isPossible = true;
                     }
-                
+                    
                 if (isPossible) {
                     JOptionPane.showMessageDialog(null,jugadores.actualizarJugador(jugador));
                     cargarJugadores(this.jugadores.cargarDatos());
@@ -546,9 +610,10 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
         
         if (opcion == 0) {
             String duiJugador = this.inputDui.getText();
-            String id_universidad = this.inputUniversidadCombo.getSelectedItem().toString();
+            String id_equipo = this.inputCEquipo.getSelectedItem().toString();
             
-            if (jugadores.cantidadJugador(id_universidad) <= 5) {
+            System.out.println(jugadores.cantidadJugador(id_equipo));
+            if (jugadores.cantidadJugador(id_equipo) < 6) {
                 JOptionPane.showMessageDialog(null,"Ya haz llegado al minimo de jugadores (5)");
                 resetCampos();
             }else{
@@ -559,6 +624,30 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
         }
      
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void comboEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEquipoActionPerformed
+        this.tablaModelo.setRowCount(0);
+         
+         
+         
+        if (jugadores.filtrarJugadorEquipo(this.comboEquipo.getSelectedItem().toString()).size() > 0) {
+            
+            cargarJugadores(jugadores.filtrarJugadorEquipo(this.comboEquipo.getSelectedItem().toString()));
+            this.labelCantidadEquipo.setText("Cantidad jugadores: " 
+                        + this.jugadores.cantidadJugador(this.comboEquipo.getSelectedItem().toString())
+                        + " Equipo: " +  this.comboEquipo.getSelectedItem().toString()   );
+            
+        }else if(!this.comboEquipo.getSelectedItem().toString().contains("Selecciona un equipo")){
+            JOptionPane.showMessageDialog(null,"Este equipo no tiene jugadores");
+            this.labelCantidadEquipo.setText("Cantidad jugadores: " 
+                        + this.jugadores.cantidadJugador(this.comboEquipo.getSelectedItem().toString())
+                        + " Equipo: " +  this.comboEquipo.getSelectedItem().toString()   );
+        }else if(this.comboEquipo.getSelectedItem().toString().contains("Selecciona un equipo")){
+            this.tablaModelo.setRowCount(0);
+            this.labelCantidadEquipo.setText("");
+            cargarJugadores(this.jugadores.cargarDatos());
+        }
+    }//GEN-LAST:event_comboEquipoActionPerformed
 
     boolean isCorrect(){
         boolean isAdded = 
@@ -571,6 +660,7 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
                     || this.inputEstatura.getText().isEmpty()
                     && this.inputPosicionCombo.getSelectedItem().toString().contains("Selecciona una universidad")
                     && this.inputUniversidadCombo.getSelectedItem().toString().contains("Selecciona una universidad")
+                    && this.inputCEquipo.getSelectedItem().toString().contains("Selecciona un equipo")
                );
         return isAdded;
     }
@@ -580,7 +670,9 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> comboEquipo;
     private javax.swing.JComboBox<String> comboUniversidadFiltro;
+    private javax.swing.JComboBox<String> inputCEquipo;
     private javax.swing.JTextField inputDui;
     private javax.swing.JTextField inputEdad;
     private javax.swing.JTextField inputEstatura;
@@ -595,6 +687,8 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -605,6 +699,7 @@ public class AdminJugadorForms extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel labelCantidadEquipo;
     private javax.swing.JTable tablaJugadores;
     // End of variables declaration//GEN-END:variables
 }

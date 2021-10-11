@@ -33,6 +33,7 @@ public class MDIMainApp extends javax.swing.JFrame {
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
         saveMenuItem = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,7 +52,7 @@ public class MDIMainApp extends javax.swing.JFrame {
         fileMenu.setText("Operaciones");
 
         openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Administrar equipos");
+        openMenuItem.setText("Administrar Universidades");
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openMenuItemActionPerformed(evt);
@@ -67,6 +68,14 @@ public class MDIMainApp extends javax.swing.JFrame {
             }
         });
         fileMenu.add(saveMenuItem);
+
+        jMenuItem1.setText("Administrar equipos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem1);
 
         menuBar.add(fileMenu);
 
@@ -97,6 +106,12 @@ public class MDIMainApp extends javax.swing.JFrame {
         administradorJugador.setVisible(true);
         this.desktopPane.add(administradorJugador);
     }//GEN-LAST:event_saveMenuItemActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       AdminTeamsForms formJugadores = new AdminTeamsForms();
+       formJugadores.setVisible(true);
+       this.desktopPane.add(formJugadores);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,6 +151,7 @@ public class MDIMainApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem saveMenuItem;

@@ -32,6 +32,7 @@ public class JugadorAcciones {
                 jugadorAgregar.setPeso(resultados.getDouble("peso"));
                 jugadorAgregar.setId_posicion(resultados.getString("id_posicion"));
                 jugadorAgregar.setId_universidad(resultados.getString("id_universidad"));
+                jugadorAgregar.setId_equipo((resultados.getString("id_equipo") == null)?"Sin equipo":resultados.getString("id_equipo"));
                 
                 jugadores.add(jugadorAgregar);
             }
@@ -46,7 +47,7 @@ public class JugadorAcciones {
         return jugadores;
     }
     
-    public ArrayList<Jugador> filtrarJugador(String id_universidad){
+    public ArrayList<Jugador> filtrarJugadorUniversidad(String id_universidad){
         ArrayList<Jugador> jugadores = new ArrayList<>();
         
         Conexion objetoConexion = new Conexion();
@@ -69,6 +70,45 @@ public class JugadorAcciones {
                 jugadorAgregar.setPeso(resultados.getDouble("peso"));
                 jugadorAgregar.setId_posicion(resultados.getString("id_posicion"));
                 jugadorAgregar.setId_universidad(resultados.getString("id_universidad"));
+                jugadorAgregar.setId_equipo(resultados.getString("id_equipo"));
+                
+                jugadores.add(jugadorAgregar);
+            }
+            
+            statement.close();
+            resultados.close();
+            
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        
+        return jugadores;
+    }
+    
+    public ArrayList<Jugador> filtrarJugadorEquipo(String id_equipo){
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        
+        Conexion objetoConexion = new Conexion();
+        Connection conexion = objetoConexion.getConexion();
+        
+        try {
+            String sql = "SELECT * FROM jugador WHERE id_equipo = '" + id_equipo + "'";
+            
+            Statement statement = conexion.createStatement();
+            ResultSet resultados = statement.executeQuery(sql);
+            
+            while (resultados.next()) {
+                Jugador jugadorAgregar = new Jugador();
+                
+                //Asignacion de datos
+                jugadorAgregar.setDui(resultados.getString("dui"));
+                jugadorAgregar.setNombre(resultados.getString("nombre"));
+                jugadorAgregar.setEdad(resultados.getInt("edad"));
+                jugadorAgregar.setEstatura(resultados.getDouble("estatura"));
+                jugadorAgregar.setPeso(resultados.getDouble("peso"));
+                jugadorAgregar.setId_posicion(resultados.getString("id_posicion"));
+                jugadorAgregar.setId_universidad(resultados.getString("id_universidad"));
+                jugadorAgregar.setId_equipo((resultados.getString("id_equipo") == null)?"Sin equipo":resultados.getString("id_equipo"));
                 
                 jugadores.add(jugadorAgregar);
             }
@@ -116,7 +156,8 @@ public class JugadorAcciones {
 
         try {
             String sql = "UPDATE jugador SET "
-                    + "jugador.nombre = ? , jugador.edad = ? ,jugador.estatura = ? ,jugador.peso = ?, jugador.id_posicion = ?, jugador.id_universidad = ?"
+                    + "jugador.nombre = ? , jugador.edad = ? ,jugador.estatura = ? ,jugador.peso = ?, "
+                    + "jugador.id_posicion = ?, jugador.id_universidad = ? , jugador.id_equipo = ? "
                     + " WHERE jugador.dui = ?";
             
             Conexion objetoConexion = new Conexion();
@@ -129,7 +170,8 @@ public class JugadorAcciones {
             statement.setString(4, Double.toString(jugadorActualizar.getPeso()));
             statement.setString(5, jugadorActualizar.getId_posicion());
             statement.setString(6, jugadorActualizar.getId_universidad());
-            statement.setString(7, jugadorActualizar.getDui());
+            statement.setString(8, jugadorActualizar.getDui());
+            statement.setString(7, jugadorActualizar.getId_equipo());
             
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
@@ -146,8 +188,8 @@ public class JugadorAcciones {
         String mensaje = "";
         try {
             String sql = "INSERT INTO jugador "
-                        + "(dui, nombre, edad, estatura,peso, id_posicion, id_universidad) "
-                        + "VALUES (?,?,?,?,?,?,?);";
+                        + "(dui, nombre, edad, estatura,peso, id_posicion, id_universidad , id_equipo) "
+                        + "VALUES (?,?,?,?,?,?,? , ?);";
  
             Conexion objetoConexion = new Conexion();
             Connection conexion = objetoConexion.getConexion();
@@ -160,7 +202,8 @@ public class JugadorAcciones {
             statement.setString(5, Double.toString(jugadorAdd.getPeso()));
             statement.setString(6, jugadorAdd.getId_posicion());
             statement.setString(7, jugadorAdd.getId_universidad());
-
+            statement.setString(8, jugadorAdd.getId_equipo());
+            
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
                 mensaje = "El jugador fue agregado exitosamente";
@@ -203,7 +246,7 @@ public class JugadorAcciones {
         try {
             String sql = "SELECT "
                     + "COUNT(jugador.nombre) AS cantidad_jugadores FROM jugador "
-                    + "WHERE jugador.id_universidad = '"+id_universidad+"'";
+                    + "WHERE jugador.id_equipo = '"+id_universidad+"'";
             
             Statement statement = conexion.createStatement();
             ResultSet resultados = statement.executeQuery(sql);
@@ -232,7 +275,7 @@ public class JugadorAcciones {
             String sql = "SELECT "
                         + "COUNT(jugador.dui) AS cantidad "
                         + "FROM jugador"
-                        + " WHERE jugador.id_universidad = '"+id_universidad+"' AND jugador.id_posicion = '"+id_posicion+"'";
+                        + " WHERE jugador.id_equipo = '"+id_universidad+"' AND jugador.id_posicion = '"+id_posicion+"'";
             
             Statement statement = conexion.createStatement();
             ResultSet resultados = statement.executeQuery(sql);
